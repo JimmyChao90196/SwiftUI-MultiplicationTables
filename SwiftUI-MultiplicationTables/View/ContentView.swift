@@ -8,12 +8,15 @@
 import SwiftUI
 import Foundation
 
-struct ContentView: View {
+struct ContentView: 
+    View,
+    SettingViewDelegation,
+    QuestionViewDelegation {
     
     let questionFactory = QuestionFactory()
     let scoreTracker = ScoreTracker()
     
-    @State private var TotalRound: Int = 3
+    @State private var totalRound: Int = 3
     @State private var baseNumber: Int = 2
     @State private var questions = [Question]()
     @State private var isRoundBegin = false
@@ -22,54 +25,47 @@ struct ContentView: View {
     @State private var playerAnswer = 0
     @State private var finalRecords = [Question: Bool]()
     
-    // Formatter
-    let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        formatter.zeroSymbol  = ""
-        return formatter
-    }()
-    
     var body: some View {
         
         NavigationStack {
             ZStack {
-                AngularGradient(colors: [.red, .green, .blue, .cyan, .red], center: .center).ignoresSafeArea()
+                AngularGradient(
+                    colors: [.red, .green, .blue, .cyan, .red],
+                    center: .center)
+                .ignoresSafeArea()
                 
                 VStack(alignment: .center ,spacing: 20) {
                     
                     if !isRoundBegin {
-                        List {
-                            Section("How many questions") {
-                                Stepper("Now we have \(TotalRound) questions", value: $TotalRound)
-                            }
-                            
-                            Section("Choose a multiplication table") {
-                                Stepper("Now we're playing \(baseNumber)", value: $baseNumber)
-                            }
-                        }
-                        .scrollContentBackground(.hidden)
-                        .frame(maxWidth: .infinity, maxHeight: 550)
-                        .transition(.slide)
+                        
+                        SettingView(delegate: self)
+                        
                     } else if isRoundEnded == false {
-                        List {
-                            Section("Please answer the following question") {
-                                
-                                Text(questions[roundIndex].question)
-                                    .multilineTextAlignment(.center)
-                                TextField("Please type your answer here", value: $playerAnswer, formatter: numberFormatter)
-                                    .keyboardType(.numberPad)
-                            }
-                        }
-                        .scrollContentBackground(.hidden)
-                        .frame(maxWidth: .infinity, maxHeight: 550)
+                        
+                        QuestionView(
+                            questions: questions,
+                            roundIndex: roundIndex,
+                            delegate: self)
+                        
                     } else {
                         
-                        List(questions, id: \.self) { question in
-                            HStack {
-                                Text("\(question.question)")
-                                Text("\(finalRecords[question])")
+                        VStack {
+                            
+                            List(questions, id: \.self) { question in
+                                HStack(alignment: .center) {
+                                    Text("\(question.question)")
+                                    Text("\(finalRecords[question, default: false] ? "Correct" : "Incorrect")")
+                                }
                             }
+                            .scrollContentBackground(.hidden)
+                            
+                            Button("Restart") {
+                                isRoundBegin = false
+                                isRoundEnded = false
+                                finalRecords = [Question: Bool]()
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .padding(40)
                         }
                     }
                     
@@ -77,10 +73,12 @@ struct ContentView: View {
                         Button("Begin") {
                             // Prepare questions for current round
                             questions = questionFactory.generateQuestions(
-                                by: TotalRound,
+                                by: totalRound,
                                 and: baseNumber)
                             
                             scoreTracker.convertToRecords(questions: questions)
+                            roundIndex = 0
+                            playerAnswer = 0
                             
                             isRoundBegin = true
                         }
@@ -100,15 +98,13 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, maxHeight: 550)
                 .clipShape(.rect(cornerRadius: 20))
                 .padding()
-                .onSubmit {
-                    checkRoundEnded()
-                    askNextQuestion()
-                }
                 .animation(.easeInOut, value: isRoundBegin)
                 
             }.navigationTitle("Multiplication Game")
         }
     }
+    
+    
     // Game over
     func checkRoundEnded() {
         scoreTracker.checkCorrectness(
@@ -116,7 +112,7 @@ struct ContentView: View {
             currentIndex: roundIndex,
             playerAnswer: playerAnswer)
         
-        guard roundIndex != (TotalRound - 1) else {
+        guard roundIndex != (totalRound - 1) else {
             
             finalRecords = scoreTracker.showRecords()
             isRoundEnded = true
@@ -128,10 +124,21 @@ struct ContentView: View {
     // Next question
     func askNextQuestion() {
         
-        guard roundIndex != (TotalRound - 1) else { return }
-        guard playerAnswer != 0 else { return }
+        guard roundIndex != (totalRound - 1) else { return }
         roundIndex += 1
         playerAnswer = 0
+    }
+    
+    // Delegation
+    func updateBaseNumber(with baseNumber: Int) {
+        self.baseNumber = baseNumber
+    }
+    func updateTotalRound(with totalRound: Int) {
+        self.totalRound = totalRound
+    }
+    
+    func updatePlayerAnswer(with playerAnswer: Int) {
+        self.playerAnswer = playerAnswer
     }
 }
 

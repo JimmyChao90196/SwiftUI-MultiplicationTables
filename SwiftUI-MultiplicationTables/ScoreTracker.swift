@@ -18,8 +18,6 @@ class ScoreTracker {
         currentIndex: Int,
         playerAnswer: Int) {
             
-            guard playerAnswer != 0 else { return }
-            
             // Check correctness
             self.questions = questions
             let actaulAnswer = self.questions[currentIndex].actualAnswer
@@ -30,7 +28,7 @@ class ScoreTracker {
             } else {
                 records[currentQuestion] = false
             }
-    }
+        }
     
     func convertToRecords(questions: [Question]) {
         records = questions.reduce(into: [Question: Bool](), { partialResult, question in
