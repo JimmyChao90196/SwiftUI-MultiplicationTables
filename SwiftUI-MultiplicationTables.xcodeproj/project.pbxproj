@@ -11,6 +11,10 @@
 		7437CC702BAA624A0028A852 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7437CC6F2BAA624A0028A852 /* ContentView.swift */; };
 		7437CC722BAA624B0028A852 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7437CC712BAA624B0028A852 /* Assets.xcassets */; };
 		7437CC752BAA624B0028A852 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7437CC742BAA624B0028A852 /* Preview Assets.xcassets */; };
+		749D80D42BABD1A6001BE270 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D80D32BABD1A6001BE270 /* Model.swift */; };
+		749D80D62BABD1ED001BE270 /* QuestionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D80D52BABD1ED001BE270 /* QuestionFactory.swift */; };
+		749D80D82BAC0FFC001BE270 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D80D72BAC0FFC001BE270 /* Modifier.swift */; };
+		749D80DA2BAC1255001BE270 /* ScoreTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D80D92BAC1255001BE270 /* ScoreTracker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		7437CC6F2BAA624A0028A852 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7437CC712BAA624B0028A852 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7437CC742BAA624B0028A852 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		749D80D32BABD1A6001BE270 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		749D80D52BABD1ED001BE270 /* QuestionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFactory.swift; sourceTree = "<group>"; };
+		749D80D72BAC0FFC001BE270 /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
+		749D80D92BAC1255001BE270 /* ScoreTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTracker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,10 @@
 		7437CC6C2BAA624A0028A852 /* SwiftUI-MultiplicationTables */ = {
 			isa = PBXGroup;
 			children = (
+				749D80D92BAC1255001BE270 /* ScoreTracker.swift */,
+				749D80D72BAC0FFC001BE270 /* Modifier.swift */,
+				749D80D52BABD1ED001BE270 /* QuestionFactory.swift */,
+				749D80D32BABD1A6001BE270 /* Model.swift */,
 				7437CC6D2BAA624A0028A852 /* SwiftUI_MultiplicationTablesApp.swift */,
 				7437CC6F2BAA624A0028A852 /* ContentView.swift */,
 				7437CC712BAA624B0028A852 /* Assets.xcassets */,
@@ -137,8 +149,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				749D80DA2BAC1255001BE270 /* ScoreTracker.swift in Sources */,
+				749D80D42BABD1A6001BE270 /* Model.swift in Sources */,
 				7437CC702BAA624A0028A852 /* ContentView.swift in Sources */,
 				7437CC6E2BAA624A0028A852 /* SwiftUI_MultiplicationTablesApp.swift in Sources */,
+				749D80D62BABD1ED001BE270 /* QuestionFactory.swift in Sources */,
+				749D80D82BAC0FFC001BE270 /* Modifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
