@@ -8,11 +8,38 @@
 import SwiftUI
 
 struct RecordView: View {
+    
+    var questions: [Question]
+    var finalRecords: [Question: Bool]
+    var restartAction: () -> Void
+    
+    init(
+        questions: [Question],
+        finalRecords: [Question : Bool],
+        restartAction: @escaping () -> Void) {
+            self.questions = questions
+            self.finalRecords = finalRecords
+            self.restartAction = restartAction
+        }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            
+            List(questions, id: \.self) { question in
+                HStack(alignment: .center) {
+                    Text("\(question.question)")
+                    Text("\(finalRecords[question, default: false] ? "Correct" : "Incorrect")")
+                }
+            }
+            .scrollContentBackground(.hidden)
+            
+            Button("Restart") {
+                
+                restartAction()
+                
+            }
+            .buttonStyle(.borderedProminent)
+            .padding(40)
+        }
     }
-}
-
-#Preview {
-    RecordView()
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol QuestionViewDelegation {
+protocol QuestionViewDelegation{
     func updatePlayerAnswer(with playerAnswer: Int)
 }
 

@@ -12,6 +12,7 @@ protocol QuestionProtocol {
     var randomNumber: Int { get set }
     var question: String { get }
     var actualAnswer: Int { get }
+    var id: String { get }
 }
 
 struct Question: QuestionProtocol, Hashable {

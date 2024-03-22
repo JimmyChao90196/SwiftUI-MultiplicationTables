@@ -49,24 +49,13 @@ struct ContentView:
                         
                     } else {
                         
-                        VStack {
-                            
-                            List(questions, id: \.self) { question in
-                                HStack(alignment: .center) {
-                                    Text("\(question.question)")
-                                    Text("\(finalRecords[question, default: false] ? "Correct" : "Incorrect")")
-                                }
-                            }
-                            .scrollContentBackground(.hidden)
-                            
-                            Button("Restart") {
+                        RecordView(
+                            questions: questions,
+                            finalRecords: finalRecords) {
                                 isRoundBegin = false
                                 isRoundEnded = false
                                 finalRecords = [Question: Bool]()
                             }
-                            .buttonStyle(.borderedProminent)
-                            .padding(40)
-                        }
                     }
                     
                     if !isRoundBegin {
