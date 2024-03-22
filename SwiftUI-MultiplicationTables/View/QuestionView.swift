@@ -20,11 +20,10 @@ struct QuestionView: View {
     var roundIndex: Int
     
     // Delegation
-    var delegate: QuestionViewDelegation
+    @State var delegate: QuestionViewDelegation
     
     // Closure
     var nextQuestion: () -> Void
-    
     
     // Formatter
     let numberFormatter: NumberFormatter = {
@@ -52,9 +51,14 @@ struct QuestionView: View {
             
             Button("Next") {
                 nextQuestion()
+                playerAnswer = 0
             }
             .buttonStyle(.borderedProminent)
             .padding(40)
+        }
+        .onSubmit {
+            nextQuestion()
+            playerAnswer = 0
         }
     }
 }

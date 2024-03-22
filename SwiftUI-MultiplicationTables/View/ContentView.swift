@@ -25,6 +25,9 @@ struct ContentView:
     @State private var playerAnswer = 0
     @State private var finalRecords = [Question: Bool]()
     
+    // View as property
+    @State var questionView: QuestionView?
+    
     var body: some View {
         
         NavigationStack {
@@ -39,17 +42,7 @@ struct ContentView:
                     if !isRoundBegin {
                         
                         SettingView(delegate: self) {
-                            
-                            // Prepare questions for current round
-                            questions = questionFactory.generateQuestions(
-                                by: totalRound,
-                                and: baseNumber)
-                            
-                            // Create a records at the beginning
-                            scoreTracker.convertToRecords(questions: questions)
-                            roundIndex = 0
-                            playerAnswer = 0
-                            isRoundBegin = true
+                            prepareForGameStart()
                         }
                         
                     } else if isRoundEnded == false {
@@ -74,7 +67,7 @@ struct ContentView:
                     }
 
                 }
-                .background(.ultraThinMaterial)
+                .background(.ultraThickMaterial)
                 .frame(maxWidth: .infinity, maxHeight: 550)
                 .clipShape(.rect(cornerRadius: 20))
                 .padding()
@@ -83,7 +76,19 @@ struct ContentView:
             }.navigationTitle("Multiplication Game")
         }
     }
-    
+    // Game start
+    func prepareForGameStart() {
+        // Prepare questions for current round
+        questions = questionFactory.generateQuestions(
+            by: totalRound,
+            and: baseNumber)
+        
+        // Create a records at the beginning
+        scoreTracker.convertToRecords(questions: questions)
+        roundIndex = 0
+        playerAnswer = 0
+        isRoundBegin = true
+    }
     
     // Game over
     func checkRoundEnded() {
@@ -120,6 +125,10 @@ struct ContentView:
     func updatePlayerAnswer(with playerAnswer: Int) {
         self.playerAnswer = playerAnswer
     }
+}
+
+class ViewDelegation {
+    
 }
 
 #Preview {
