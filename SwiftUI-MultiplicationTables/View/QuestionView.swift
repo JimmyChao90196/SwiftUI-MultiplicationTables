@@ -13,11 +13,18 @@ protocol QuestionViewDelegation{
 
 struct QuestionView: View {
     
-    var questions: [Question]
-    var roundIndex: Int
     @State private var playerAnswer: Int = 0
     
+    // Normal property
+    var questions: [Question]
+    var roundIndex: Int
+    
+    // Delegation
     var delegate: QuestionViewDelegation
+    
+    // Closure
+    var nextQuestion: () -> Void
+    
     
     // Formatter
     let numberFormatter: NumberFormatter = {
@@ -28,19 +35,26 @@ struct QuestionView: View {
     }()
     
     var body: some View {
-        List {
-            Section("Please answer the following question") {
-                Text(questions[roundIndex].question)
-                    .multilineTextAlignment(.center)
-                TextField("Please type your answer here", value: $playerAnswer, formatter: numberFormatter)
-                    .keyboardType(.numberPad)
+        VStack {
+            List {
+                Section("Please answer the following question") {
+                    Text(questions[roundIndex].question)
+                        .multilineTextAlignment(.center)
+                    TextField("Please type your answer here", value: $playerAnswer, formatter: numberFormatter)
+                        .keyboardType(.numberPad)
+                }
             }
-        }
-        .scrollContentBackground(.hidden)
-        .frame(maxWidth: .infinity, maxHeight: 550)
-        .transition(.slide)
-        .onChange(of: playerAnswer) {
-            delegate.updatePlayerAnswer(with: playerAnswer)
+            .scrollContentBackground(.hidden)
+            .frame(maxWidth: .infinity, maxHeight: 550)
+            .onChange(of: playerAnswer) {
+                delegate.updatePlayerAnswer(with: playerAnswer)
+            }
+            
+            Button("Next") {
+                nextQuestion()
+            }
+            .buttonStyle(.borderedProminent)
+            .padding(40)
         }
     }
 }

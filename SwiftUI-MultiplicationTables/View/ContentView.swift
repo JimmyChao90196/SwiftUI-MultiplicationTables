@@ -38,14 +38,29 @@ struct ContentView:
                     
                     if !isRoundBegin {
                         
-                        SettingView(delegate: self)
+                        SettingView(delegate: self) {
+                            
+                            // Prepare questions for current round
+                            questions = questionFactory.generateQuestions(
+                                by: totalRound,
+                                and: baseNumber)
+                            
+                            // Create a records at the beginning
+                            scoreTracker.convertToRecords(questions: questions)
+                            roundIndex = 0
+                            playerAnswer = 0
+                            isRoundBegin = true
+                        }
                         
                     } else if isRoundEnded == false {
                         
                         QuestionView(
                             questions: questions,
                             roundIndex: roundIndex,
-                            delegate: self)
+                            delegate: self) {
+                                checkRoundEnded()
+                                askNextQuestion()
+                            }
                         
                     } else {
                         
@@ -57,31 +72,7 @@ struct ContentView:
                                 finalRecords = [Question: Bool]()
                             }
                     }
-                    
-                    if !isRoundBegin {
-                        Button("Begin") {
-                            // Prepare questions for current round
-                            questions = questionFactory.generateQuestions(
-                                by: totalRound,
-                                and: baseNumber)
-                            
-                            scoreTracker.convertToRecords(questions: questions)
-                            roundIndex = 0
-                            playerAnswer = 0
-                            
-                            isRoundBegin = true
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .padding(40)
-                        .transition(.scale)
-                    } else if isRoundEnded == false{
-                        Button("Next") {
-                            checkRoundEnded()
-                            askNextQuestion()
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .padding(40)
-                    }
+
                 }
                 .background(.ultraThinMaterial)
                 .frame(maxWidth: .infinity, maxHeight: 550)
