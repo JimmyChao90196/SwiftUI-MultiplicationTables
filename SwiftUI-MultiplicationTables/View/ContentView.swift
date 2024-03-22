@@ -29,7 +29,7 @@ struct ContentView:
     @State var questionView: QuestionView?
     
     var body: some View {
-        
+
         NavigationStack {
             ZStack {
                 AngularGradient(
@@ -41,19 +41,23 @@ struct ContentView:
                     
                     if !isRoundBegin {
                         
-                        SettingView(delegate: self) {
+                        let settingView = SettingView(delegate: self) {
                             prepareForGameStart()
                         }
                         
+                        settingView.transition(.customRotation)
+                                                
                     } else if isRoundEnded == false {
                         
-                        QuestionView(
+                        let questionView = QuestionView(
                             questions: questions,
                             roundIndex: roundIndex,
                             delegate: self) {
                                 checkRoundEnded()
                                 askNextQuestion()
                             }
+                        
+                        questionView.transition(.opacity)
                         
                     } else {
                         
@@ -71,6 +75,7 @@ struct ContentView:
                 .frame(maxWidth: .infinity, maxHeight: 550)
                 .clipShape(.rect(cornerRadius: 20))
                 .padding()
+                .animation(.easeInOut, value: isRoundEnded)
                 .animation(.easeInOut, value: isRoundBegin)
                 
             }.navigationTitle("Multiplication Game")
@@ -124,6 +129,10 @@ struct ContentView:
     
     func updatePlayerAnswer(with playerAnswer: Int) {
         self.playerAnswer = playerAnswer
+    }
+    
+    func updateDifficulty(with difficulty: Difficulties) {
+        questionFactory.defaultRange = difficulty.difficulty
     }
 }
 

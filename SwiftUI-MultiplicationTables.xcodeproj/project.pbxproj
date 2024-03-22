@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740EF9432BADD442006365B5 /* CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740EF9422BADD442006365B5 /* CustomTransition.swift */; };
 		7437CC6E2BAA624A0028A852 /* SwiftUI_MultiplicationTablesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7437CC6D2BAA624A0028A852 /* SwiftUI_MultiplicationTablesApp.swift */; };
 		7437CC702BAA624A0028A852 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7437CC6F2BAA624A0028A852 /* ContentView.swift */; };
 		7437CC722BAA624B0028A852 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7437CC712BAA624B0028A852 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		740EF9422BADD442006365B5 /* CustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransition.swift; sourceTree = "<group>"; };
 		7437CC6A2BAA624A0028A852 /* SwiftUI-MultiplicationTables.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-MultiplicationTables.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7437CC6D2BAA624A0028A852 /* SwiftUI_MultiplicationTablesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_MultiplicationTablesApp.swift; sourceTree = "<group>"; };
 		7437CC6F2BAA624A0028A852 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		7437CC6C2BAA624A0028A852 /* SwiftUI-MultiplicationTables */ = {
 			isa = PBXGroup;
 			children = (
+				740EF9422BADD442006365B5 /* CustomTransition.swift */,
 				749D80D92BAC1255001BE270 /* ScoreTracker.swift */,
 				749D80D72BAC0FFC001BE270 /* Modifier.swift */,
 				749D80D52BABD1ED001BE270 /* QuestionFactory.swift */,
@@ -171,6 +174,7 @@
 			files = (
 				749763672BAC75260081853D /* QuestionView.swift in Sources */,
 				749D80DA2BAC1255001BE270 /* ScoreTracker.swift in Sources */,
+				740EF9432BADD442006365B5 /* CustomTransition.swift in Sources */,
 				749763642BAC6F390081853D /* RecordView.swift in Sources */,
 				749D80D42BABD1A6001BE270 /* Model.swift in Sources */,
 				7437CC702BAA624A0028A852 /* ContentView.swift in Sources */,

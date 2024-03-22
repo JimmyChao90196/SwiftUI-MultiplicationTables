@@ -16,6 +16,7 @@ class QuestionFactory: QuestionFactoryProtocol {
     
     // Private property
     private var randomNumbers = [Int]()
+    var defaultRange = 0..<12
     
     func generateQuestions(by questionNum: Int, and baseNum: Int) -> [Question] {
         
@@ -34,7 +35,7 @@ class QuestionFactory: QuestionFactoryProtocol {
     private func generateRandomNumbers(by num: Int) -> [Int] {
         var randNumbers = [Int]()
         for _ in 0..<num {
-            let randNumber = Int.random(in: 0...12)
+            let randNumber = Int.random(in: defaultRange)
             randNumbers.append(randNumber)
         }
         
